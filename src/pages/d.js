@@ -1,8 +1,12 @@
 import React from 'react'
 
+import Layout from '../components/Layout'
+
 const D = () =>{
     return(
-        <h1>Mostrando Display do tablet</h1>
+        <Layout>
+            <h1>Mostrando Display do tablet</h1>
+        </Layout>
     )
 }
 

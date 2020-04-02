@@ -12,7 +12,13 @@
   "dependencies": {
     "firebase": "^7.13.1",
     "gatsby": "^2.20.9",
+    "gatsby-plugin-postcss": "^2.2.1",
+    "gatsby-plugin-react-helmet": "^3.2.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-helmet": "^5.2.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^1.2.0"
   }
 }
