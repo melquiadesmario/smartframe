@@ -48,12 +48,12 @@ const Header = () => {
                     >
                         Login
                     </a>
-                    <a
-                        href='#'
+                    <Link
                         className='inline-block py-2 px-4 text-gray-700 bg-white hover:bg-gray-100 rounded-lg'
+                        to='/create-account'
                     >
                         Create account
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
