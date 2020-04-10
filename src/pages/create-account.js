@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-
 import firebase from '../lib/firebase'
+import { navigateTo } from 'gatsby'
 
 import Layout from '../components/Layout'
 
 const CreateAccount = () => {
     const [form, setForm] = useState({
-        email: 'melquiadesmario@hotmail.com',
-        password: '123456',
-        passwordConfirm: '123456'
+        email: '',
+        password: '',
+        passwordConfirm: ''
     })
 
     const [error, setError] = useState('')
@@ -29,6 +29,9 @@ const CreateAccount = () => {
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(form.email, form.password)
+                .then(() => {
+                    navigateTo('/app')
+                })
                 .catch(function(error) {
                     setError(error.message)
             })
@@ -48,18 +51,18 @@ const CreateAccount = () => {
 
     return(
     <Layout>
-            <div classNameName="container max-w-full mx-auto md:py-24 px-6">
+            <div className="container max-w-full mx-auto md:py-24 px-6">
             <div className="max-w-sm mx-auto px-6">
                     <div className="relative flex flex-wrap">
                         <div className="w-full relative">
-                            <div className="md:mt-6">
+                            <div className="md:mt-0">
                                 <div className="text-center font-semibold text-black">
-                                    Lorem ipsum dolor
+                                    Create yout account
                                 </div>
                                 <div className="text-center font-base text-black">
-                                    Sed ut perspiciatis unde?
+                                    You can start using SmarFrame for free.
                                 </div>
-                                <form className="mt-8" x-data="{password: '',password_confirm: ''}">
+                                <form className="mt-4" x-data="{password: '',password_confirm: ''}">
                                     <div className="mx-auto max-w-lg ">
                                         <div className="py-1">
                                             <span className="px-1 text-sm text-gray-600">Email</span>

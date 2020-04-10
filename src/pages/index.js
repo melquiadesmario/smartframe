@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'gatsby'
 import Helmet from 'react-helmet'
-
-import firebase from '../lib/firebase'
 
 import Layout from '../components/Layout'
 
-const db = firebase.firestore()
+// const db = firebase.firestore()
 
 // db.collection('scenes').where('owner', '==', 'melquiadesmario').onSnapshot(querySnapshot => {
 //     const docs = []
@@ -32,37 +29,22 @@ const db = firebase.firestore()
 
 const Index = () => {
     const [valor, setValor] = useState(0)
-    const [data, setData] = useState([])
 
     useEffect(() => {
-        console.log('useEffect')
-        db.collection('testes').onSnapshot(querySnapshot => {
-            const docs = []
-            querySnapshot.forEach(doc => {
-                console.log(`${ doc.id } => `, doc.data())
-                docs.push(doc.data())
-            })
-            setData(docs)
-        })
-
-        setInterval(() => {
-            setValor(old => old + 1)
-        }, 1000)
+        // db.collection('testes').onSnapshot(querySnapshot => {
+        //     const docs = []
+        //     querySnapshot.forEach(doc => {
+        //         console.log(`${ doc.id } => `, doc.data())
+        //         docs.push(doc.data())
+        //     })
+        //     setData(docs)
+        // })
     }, [])
-    
-    const increment = () => {
-        setValor(valorAntigo => valorAntigo + 1)
-    }
-
-    const decrement = () => {
-        setValor(valorNovo => valorNovo - 1)
-    }
 
     return(
         <Layout>
             <Helmet>
-                { valor % 2 === 1 && <title>Smart Frame</title> }
-                { valor % 2 === 0 && <title>🔔Old Tablet/Phone</title> }
+                <title>Smart Frame</title> }
                 <meta name='description' value='Test' />
             </Helmet>
             <div className='bg-gray-200 md:overflow-hidden'>
