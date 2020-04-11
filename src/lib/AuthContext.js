@@ -4,7 +4,7 @@ import firebase from '../lib/firebase'
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState({ isAuth: false })
+    const [auth, setAuth] = useState({ isAuth: false, isAuthReady: false })
 
     useEffect(() => {
         firebase
@@ -16,10 +16,14 @@ export const AuthProvider = ({ children }) => {
                         isAuth: true,
                         email: user.email,
                         name: user.displayName || user.email,
-                        emailVerified: user.emailVerified
+                        emailVerified: user.emailVerified,
+                        isAuthReady: true
                     })
                 }else{
-                    setAuth({ isAuth: false })
+                    setAuth({
+                        isAuth: false,
+                        isAuthReady: true
+                    })
                 }
             })
     }, [])
