@@ -4,20 +4,9 @@ import { navigate } from 'gatsby'
 import { useAuth } from '../lib/AuthContext'
 
 import Layout from '../components/Layout'
-
-const CreateScene = () => {
-    const auth = useAuth()
-    return(
-        <div>
-            <h1>Create Scene</h1>
-            <pre>{ JSON.stringify(auth) }</pre>
-        </div>
-    )
-}
-
-const Scenes = () => {
-    return <h1>Scenes</h1>
-}
+import CreateScene from '../client-side-routes/app/CreateScene'
+import Scenes from '../client-side-routes/app/Scene'
+import UpdatePassword from '../client-side-routes/app/UpdatePassword'
 
 const ShowEmailNotification = () => {
     const auth = useAuth()
@@ -39,6 +28,10 @@ const ShowEmailNotification = () => {
             setEmailSent(false)
             setError(true)
         }
+    }
+
+    if(!auth.isAuthReady){
+        return null
     }
     
     if(!auth.emailVerified){
@@ -69,13 +62,15 @@ const ShowEmailNotification = () => {
 
 const App = () => {
     return(
-        <Layout>
+        <Layout app>
             <ShowEmailNotification />
-            <h1>My App</h1>
-            <Router basepath='/app'>
-                <CreateScene path='/create-scene' />
-                <Scenes path='/scenes' />
-            </Router>
+            <div className='container mx-auto mt-10'>
+                <Router basepath='/app'>
+                    <CreateScene path='/create-scene' />
+                    <Scenes path='/scenes' />
+                    <UpdatePassword path='/update-password' />
+                </Router>
+            </div>
         </Layout>
     )
 }

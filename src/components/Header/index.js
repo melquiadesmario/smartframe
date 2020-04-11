@@ -1,9 +1,47 @@
 import React from 'react'
 import { Link, navigate } from 'gatsby'
 
+import './styles.css'
+
 import { useAuth } from '../../lib/AuthContext'
 
-const Header = () => {
+const MyAccount = ({ signOut }) => {
+    return(
+        <div className='dropdown inline-block relative'>
+            <button className='bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center'>
+                <span>My Account</span>
+            </button>
+            <ul className='dropdown-content absolute hidden text-gray-700 pt-1'>
+                <li>
+                    <Link
+                        className='rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap'
+                        to='/app'
+                    >
+                        Panel Home
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        className='bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap'
+                        to='/app/update-password'
+                    >
+                        Update Password
+                    </Link>
+                </li>
+                <li>
+                    <button
+                        className='rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap'
+                        onClick={ signOut }
+                    >
+                        Sign Out
+                    </button>
+                </li>
+            </ul>
+        </div>
+    )
+}
+
+const Header = ({ app }) => {
     const auth = useAuth()
     const signOut = async () => {
         await auth.signOut()
@@ -66,7 +104,7 @@ const Header = () => {
                             </Link>
                         </>
                     }
-                    { auth.isAuth &&
+                    { !app && auth.isAuth &&
                         <>
                             <Link
                                 className='inline-block py-2 px-4 text-gray-700 bg-white hover:bg-gray-100 rounded-lg'
@@ -74,13 +112,10 @@ const Header = () => {
                             >
                                 Go to App
                             </Link>
-                            <button
-                                className='inline-block ml-2 py-2 px-4 text-gray-700 bg-gray hover:bg-gray-100 rounded-lg'
-                                onClick={ signOut }
-                            >
-                                Sign Out
-                            </button>
                         </>
+                    }
+                    { auth.isAuth &&
+                        <MyAccount signOut={ signOut }/>
                     }
                 </div>
             </div>
