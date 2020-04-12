@@ -159,7 +159,6 @@ const SignIn = () => {
                                         </button>
                                     </div>
                                 </form>
-
                                 <div className="text-sm font-semibold block py-4 flex justify-center">
                                     <Link
                                         className="text-black font-normal border-b-2 border-gray-200 hover:border-teal-500"

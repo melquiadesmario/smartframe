@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Helmet from 'react-helmet'
 
 import Layout from '../components/Layout'
@@ -28,8 +28,6 @@ import Layout from '../components/Layout'
 // })
 
 const Index = () => {
-    const [valor, setValor] = useState(0)
-
     useEffect(() => {
         // db.collection('testes').onSnapshot(querySnapshot => {
         //     const docs = []

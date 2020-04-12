@@ -165,19 +165,19 @@ const CreateAccount = () => {
                                             <label className="block text-gray-500 font-bold my-4 flex items-center">
                                                 <input className="leading-loose text-pink-600 top-0" type="checkbox" />
                                                 <span className="ml-2 text-sm py-2 text-gray-600 text-left">Accept the
-                                                    <a
+                                                    <Link
                                                         className="font-semibold text-black border-b-2 border-gray-200 hover:border-gray-500"
-                                                        href="#"
+                                                        to='/'
                                                     >
                                                         Terms and Conditions of the site
-                                                    </a>
+                                                    </Link>
                                                     and
-                                                    <a
+                                                    <Link
                                                         className="font-semibold text-black border-b-2 border-gray-200 hover:border-gray-500"
-                                                        href="#"
+                                                        to='/'
                                                     >
                                                         the information data policy.
-                                                    </a>
+                                                    </Link>
                                                 </span>
                                             </label>
                                         </div>
@@ -190,7 +190,6 @@ const CreateAccount = () => {
                                         </button>
                                     </div>
                                 </form>
-
                                 <div className="text-sm font-semibold block py-4 flex justify-center">
                                     <Link
                                         className="text-black font-normal border-b-2 border-gray-200 hover:border-teal-500"

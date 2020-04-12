@@ -67,24 +67,24 @@ const Header = ({ app }) => {
                         >
                             How it Works
                         </Link>
-                        <a
-                            href='#'
+                        <Link
                             className='inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6'
+                            to='/'
                         >
                             Solutions
-                        </a>
-                        <a
-                            href='#'
+                        </Link>
+                        <Link
                             className='inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6'
+                            to='/'
                         >
                             Pricing
-                        </a>
-                        <a
-                            href='#'
+                        </Link>
+                        <Link
                             className='inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6'
+                            to='/'
                         >
                             Desktop
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className='md:block'>
