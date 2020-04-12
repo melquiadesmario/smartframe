@@ -67,7 +67,7 @@ const App = () => {
             <div className='container mx-auto mt-10'>
                 <Router basepath='/app'>
                     <CreateScene path='/create-scene' />
-                    <Scenes path='/scenes' />
+                    <Scenes path='/' />
                     <UpdatePassword path='/update-password' />
                 </Router>
             </div>
