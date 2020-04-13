@@ -36,7 +36,6 @@ const Scenes = () => {
                 .onSnapshot(querySnapshot => {
                     const docs = []
                     querySnapshot.forEach(doc => {
-                        console.log(`${ doc.id } => `, doc.data())
                         docs.push({
                             ...doc.data(),
                             id: doc.id
@@ -59,8 +58,8 @@ const Scenes = () => {
             .doc()
         
             newSceneRef.set({
-            name: sceneName
-        })
+                name: sceneName
+            })
     }
 
     return(
