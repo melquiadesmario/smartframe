@@ -5,7 +5,8 @@ import { useAuth } from '../lib/AuthContext'
 
 import Layout from '../components/Layout'
 import CreateScene from '../client-side-routes/app/CreateScene'
-import Scenes from '../client-side-routes/app/Scene'
+import Scene from '../client-side-routes/app/Scene'
+import Scenes from '../client-side-routes/app/Scenes'
 import UpdatePassword from '../client-side-routes/app/UpdatePassword'
 
 const ShowEmailNotification = () => {
@@ -67,6 +68,7 @@ const App = () => {
             <div className='container mx-auto mt-10'>
                 <Router basepath='/app'>
                     <CreateScene path='/create-scene' />
+                    <Scene path='/scene/:sceneId' />
                     <Scenes path='/' />
                     <UpdatePassword path='/update-password' />
                 </Router>

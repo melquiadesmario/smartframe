@@ -2,54 +2,33 @@ import React, { useState, useEffect } from 'react'
 import firebase from '../../../lib/firebase'
 import { useAuth } from '../../../lib/AuthContext'
 
-const Scenes = () => {
+const Scene = ({ sceneId }) => {
     const auth = useAuth()
-    const [scenes, setScenes] = useState([])
+    const [scene, setScene] = useState({})
     const db = firebase.firestore()
-    console.log('UID', auth)
 
     useEffect(() => {
         if(auth.isAuthReady){
             db
                 .collection('scenes')
-                .where('owner', '==', auth.uid)
+                .doc(auth.uid)
+                .collection('scenes')
+                .doc(sceneId)
                 .onSnapshot(querySnapshot => {
-                    const docs = []
-                    querySnapshot.forEach(doc => {
-                        console.log(`${ doc.id } => `, doc.data())
-                        docs.push(doc.data())
+                    console.log('QuerySnapshot', querySnapshot.data())
+                    setScene({
+                        ...querySnapshot.data(),
+                        id: sceneId
                     })
-                    setScenes(docs)
                 })
         }
     }, [db, auth])
 
-    const createScene = () => {
-        const newSceneRef = db.collection('scenes').doc()
-        newSceneRef.set({
-            name: 'test2',
-            owner: auth.uid
-        })
-    }
-
     return(
         <div>
-            <h1>Scenes</h1>
-            <input
-                type='text'
-                name='name'
-                placeholder='Name'
-            />
-            <button
-                onClick={ createScene }
-            >
-                Create Scene
-            </button>
-            <pre>
-                { JSON.stringify(scenes, null, 2)}
-            </pre>
+            <h1>{ scene.name }</h1>
         </div>
     )
 }
 
-export default Scenes
+export default Scene
