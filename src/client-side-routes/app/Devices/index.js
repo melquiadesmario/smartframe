@@ -3,27 +3,10 @@ import { Link } from 'gatsby'
 import firebase from '../../../lib/firebase'
 import { useAuth } from '../../../lib/AuthContext'
 
-const Scene = ({ scene }) => {
-    return(
-        <div className='max-w-sm rounded overflow-hidden shadow-lg mt-5'>
-            <img className='w-full' src='https://source.unsplash.com/random/384x234' alt='Random Image' />
-            <div className='px-6 py-4'>
-                <div className='font-bold text-xl mb-2'>
-                    <Link
-                        className='hover:underline'
-                        to={`/app/scene/${ scene.id }`}
-                    >
-                        { scene.name }
-                    </Link>
-                </div>
-            </div>
-        </div>
-    )
-}
-
 const Devices = () => {
     const auth = useAuth()
-    const [sceneName, setSceneName] = useState('')
+    const [deviceId, setDeviceId] = useState('')
+    const [deviceStatus, setDeviceStatus] = useState('')
     const [scenes, setScenes] = useState([])
     const db = firebase.firestore()
 
@@ -47,19 +30,25 @@ const Devices = () => {
     }, [db, auth])
 
     const handleInputChange = event => {
-        setSceneName(event.target.value)
+        setDeviceId(event.target.value)
     }
 
-    const createScene = () => {
-        const newSceneRef = db
-            .collection('scenes')
-            .doc(auth.uid)
-            .collection('scenes')
-            .doc()
+    const activateDevice = async () => {
+        const docRef = db
+            .collection('temp-devices')
+            .doc(deviceId)
+
+        const doc = await docRef.get()
+        const deviceData = doc.data()
         
-            newSceneRef.set({
-                name: sceneName
+        if(deviceData){
+            setDeviceStatus('Valid')
+            docRef.update({
+                owner: auth.uid
             })
+        }else{
+            setDeviceStatus('Invalid')
+        }
     }
 
     return(
@@ -79,32 +68,35 @@ const Devices = () => {
                                             className='text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none'
                                             placeholder='Insert your Device ID'
                                             type='text'
-                                            name='sceneName'
-                                            value={ sceneName }
+                                            name='deviceId'
+                                            value={ deviceId }
                                             onChange={ handleInputChange }
                                         />
                                     </div>
                                     <button
                                         className='mt-1 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black'
                                         type='button'
-                                        onClick={ createScene }
+                                        onClick={ activateDevice }
                                     >
                                         Activate Device
                                     </button>
                                 </div>
                             </form>
+                            { deviceStatus === 'Valid' &&
+                                <div className='mt-5 bg-green-100 border-l-4 border-green-500 text-green-700 p-4' role='alert'>
+                                    <p className='font-bold'>Status ID</p>
+                                    <p>Device ID {deviceStatus}.</p>
+                                </div>
+                            }
+                            { deviceStatus === 'Invalid' &&
+                                <div className='mt-5 bg-red-100 border-l-4 border-red-500 text-red-700 p-4' role='alert'>
+                                    <p className='font-bold'>Status ID</p>
+                                    <p>Device ID {deviceStatus}.</p>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className='font-semibold text-black mt-5'>
-                List Scenes
-                <hr />
-            </div>
-            <div className='grid grid-cols-3 gap-4'>
-                {
-                    scenes.map(scene => <Scene key={ scene.id } scene={ scene } />)
-                }
             </div>
         </div>
     )
