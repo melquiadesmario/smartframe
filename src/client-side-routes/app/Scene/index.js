@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import firebase from '../../../lib/firebase'
 import { useAuth } from '../../../lib/AuthContext'
 
+import Chromakey from './types/ChromaKey'
+import Image from './types/Image'
+
 const FRAME_TYPES = {
     chromakey: {
         key: 'chromakey',
@@ -10,22 +13,12 @@ const FRAME_TYPES = {
     image: {
         key: 'image',
         label: 'IMAGE'
-    },
-    timer: {
-        key: 'timer',
-        label: 'TIMER'
-    },
-    other: {
-        key: 'other',
-        label: 'OTHER'
     }
 }
 
 const FrameComponents = {
-    [FRAME_TYPES.chromakey.key]: ({ id }) => <h1>Chromakey: => { id }</h1>,
-    [FRAME_TYPES.image.key]: ({ id }) => <h1>Image: => { id }</h1>,
-    [FRAME_TYPES.timer.key]: ({ id }) => <h1>Timer: => { id }</h1>,
-    [FRAME_TYPES.other.key]: ({ id }) => <h1>Other =>  { id }</h1>
+    [FRAME_TYPES.chromakey.key]: Chromakey,
+    [FRAME_TYPES.image.key]: Image
 }
 
 const Scene = ({ sceneId }) => {
@@ -81,7 +74,7 @@ const Scene = ({ sceneId }) => {
     return(
         <div className='container'>
             <h1 className='text-center font-semibold text-black mb-4'>{ scene.name }</h1>
-            <div className='grid grid-cols-4 gap-4'>
+            <div className='flex justify-around px-40'>
                 { Object.keys(FRAME_TYPES).map(key => {
                     return(
                         <div
@@ -100,7 +93,7 @@ const Scene = ({ sceneId }) => {
                 {
                     frames.map(frame => {
                         const CurrentComponent = FrameComponents[frame.type]
-                        return <p><CurrentComponent id={ frame.id } /></p>
+                        return <p><CurrentComponent id={ frame.id } frame={ frame } uid={ auth.uid } sceneId={ sceneId } /></p>
                     })
                 }
             </div>

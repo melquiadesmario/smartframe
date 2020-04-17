@@ -85,6 +85,12 @@ const Header = ({ app }) => {
                         >
                             Desktop
                         </Link>
+                        <Link
+                            className='inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6'
+                            to='/d'
+                        >
+                            Open Play
+                        </Link>
                     </div>
                 </div>
                 <div className='md:block'>

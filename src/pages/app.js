@@ -8,6 +8,7 @@ import CreateScene from '../client-side-routes/app/CreateScene'
 import Scene from '../client-side-routes/app/Scene'
 import Scenes from '../client-side-routes/app/Scenes'
 import UpdatePassword from '../client-side-routes/app/UpdatePassword'
+import Devices from '../client-side-routes/app/Devices'
 
 const ShowEmailNotification = () => {
     const auth = useAuth()
@@ -71,6 +72,7 @@ const App = () => {
                     <Scene path='/scene/:sceneId' />
                     <Scenes path='/' />
                     <UpdatePassword path='/update-password' />
+                    <Devices path='/devices' />
                 </Router>
             </div>
         </Layout>
